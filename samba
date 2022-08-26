@@ -1,0 +1,51 @@
+要共享的机子10.67.164.228
+/etc/samba/ smb.conf文件里面添加以下内容
+[lxn]
+    path = /home/newdisk2/lxn
+    browseable = yes
+    read only = no
+    valid users = lxn
+    create mask = 0644
+    force create mode = 0644
+    directory mask = 0755
+    force directory mode = 0755
+ 
+
+
+
+访问共享的机子设置：
+https://blog.csdn.net/paco_code/article/details/83994832
+1	你不能访问此共享文件夹，因为你组织的安全策略阻止未经身份验证的来宾访问
+一、问题描述（win10）：
+ 
+二、解决问题步骤：
+1、运行（win+r）,输入“gpedit.msc”启动本地组策略编辑器；
+2、依次找到“计算机配置-》管理模板-》网络-》Lanman工作站”这个节点；
+3、点击右侧“启用不安全的来宾登录”，把状态“未配置”改成“已启用”；
+ 
+
+
+https://blog.csdn.net/qq_40245756/article/details/85249435
+2	【局域网共享问题】0x80004005
+当你试图去访问某个局域网的远程地址时，报错0x80004005：
+ 
+解决方法：
+首先时检查：控制面板-》网络和共享中心-》更改高级共享设置-》启用网络发现
+ 
+然后：重要！！
+然后，控制面板-》程序-》启用/关闭Windows功能，找到SMB 1.0/CIFS 文件共享支持，看看是否启用，没有的话启用即可。
+ 
+
+
+https://12345.huawei.com/unidesk/portal/#/case_details?caseId=KT00017499
+Windows10访问Samba 提示“用户名密码不正确”
+一、问题现象：
+ 
+
+
+3	二、方法/步骤
+4	win +  R    输入 secpol.msc  打开“本地安全策略”，在本地安全策略窗口中依次打开“本地策略”-->“安全选项” 然后再右侧的列表中找到“网络安全：LAN管理器身份验证级别”，把这个选项的值改为“发送 LM 和 NTLM – 如果已协商，则使用 NTLMv2会话安全”，最后确定。如果不行，可以改为“仅发送NTLMv2响应”
+ 
+
+ 
+
