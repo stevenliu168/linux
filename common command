@@ -1,0 +1,104 @@
+ssh-keygen -t rsa -C "liuxiaoning2@hisilicon.com"
+
+reboot   重启
+
+rm -rf code   删除code目录以及子目录和文件
+echo $PATH
+export PATH=/home/lxn/bin:$PATH   添加路径到PATH
+
+cd br_kiringpu_v310b002_native/
+zip -r Cloud.zip ./Cloud/
+zip -r CloudDemo.zip ./CloudDemo/
+zip -r Client.zip ./Client/
+zip -r ClientDemo.zip ./ClientDemo/
+zip -r libsDemo.zip ./libsDemo/
+zip -r Test.zip ./Test/
+
+如果要把文件解压到指定的目录下，需要用到-d参数。
+unzip -d /temp test.zip
+
+
+显示帐户信息
+cat /etc/passwd
+
+添加用户lxn
+adduser lxn
+
+查看用户lxn的uid
+uid   lxn
+
+修改用户lxn的家目录 
+usermod -d /home/newdisk2/lxn -u 1021 lxn
+
+切换到用户lxn
+su lxn
+
+复制目录luowentong/Media-Card-0613到./lxn下面
+cp -r ./luowentong/Media-Card-0613/ ./lxn/Media-Card-0613
+
+//复制目录/home/linkunhai/下的所有文件到当前目录下
+cp -r /home/linkunhai/* ./
+
+
+
+
+注意：通过MobaXterm打开文本文件修改，不要使用默认的编辑器，可能会导致换行符消失，导致出错。使用notepad++打开编辑
+
+
+
+
+将luowentong/EnvSW-0622/目录下的文件InstructionEngineClientDemo_0622.tar.gz复制到lxn/EnvSW-0622目录
+cp ./luowentong/EnvSW-0622/InstructionEngineClientDemo_0622.tar.gz lxn/EnvSW-0622/
+
+
+
+
+拷贝xdj目录下所有文件到目录lxn
+cp -r xdj/* lxn/
+
+
+tar -zcvf gcc_pkg.tar.gz ./gcc_pkg/      #打包压缩为一个.gz格式的压缩包
+tar -zxvf gcc_pkg.tar.gz -C ./gcc_pkg/      #解包解压.gz格式的压缩包到gcc_pkg文件夹
+
+tar -jcvf gcc_pkg.tar.bz2 ./gcc_pkg/      #打包压缩为一个.bz2格式的压缩包
+tar -jxvf gcc_pkg.tar.tar.bz2 /gcc_pkg/  #解包解压.bz2格式的压缩包到gcc_pkg文件夹
+
+tar -Jcvf gcc_pkg.tar.xz /gcc_pkg/        #打包压缩为一个.xz格式的压缩包
+tar -Jxvf gcc_pkg.tar.xz /gcc_pkg/        #解包解压.xz格式的压缩包到gcc_pkg文件夹
+
+
+
+tar -zcvf AndroidSDK.tar.gz ./AndroidSDK/ 
+tar -zxvf AndroidSDK.tar.gz ./AndroidSDK/ 
+
+
+tar -zxvf aosp-7.1.1_r58.tar.gz
+
+
+
+
+查看Linux内核版本命令
+1、cat /proc/version
+2、uname -a
+
+查看Linux系统版本的命令
+1、lsb_release -a
+2、cat /etc/issue
+
+
+-type 按类型进行查找，d查找目录，f查找文件
+find . -type d -name [document]
+find . -type f -name [filename]
+
+
+Linux查看分区文件系统类型
+1、df -T 命令查看
+2、parted -l命令查看
+3、blkid命令查看
+
+
+tee：从标准输入中读取，并将读入的内容写到标准输出以及文件中。
+将编译脚本compie.sh产生的log输出屏幕的同时输出到bigfish.log文件。
+ ./compile.sh | tee bigfish.log
+
+
