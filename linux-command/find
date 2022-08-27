@@ -1,0 +1,33 @@
+查找当前目录下大于100M的文件
+find . -type f -size +100M
+find . -type f -size +10000M -path ./home -prune
+
+查找当前目录下component_config.json文件
+find ./ -name component_config.json
+find ./ -name libLLVM70.so
+find ./ -name glut.h
+find ./ -name HandleClientMap.h
+find ./ -name vmiGLShareMem.cpp
+find ./ -name IVmi.hal
+find ./ -name IRenderControlEncoder.h
+
+#grep指定h文件类型查找hello字符串：
+find -type f -name '*.h' | xargs grep "hello"
+
+查找包含"VmiThread"内容的文件，显示文件名+内容
+find ./  -type f |xargs grep "VmiThread"
+find ./  -type f |xargs grep "GLint"
+
+
+查找子目录android
+find ./ –type d -name android
+
+//删除查找的so文件
+find  -iname *.so | xargs rm -fr
+
+了解find 的其他指令用法
+man find
+如果使用该命令时，不设置任何参数，则find命令将在当前目录下查找子目录与文件。并且将查找到的子目录和文件全部进行显示。
+
+linux find 查找子目录
+https://blog.csdn.net/wangbaosongmsn/article/details/107685370

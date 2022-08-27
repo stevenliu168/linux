@@ -1,0 +1,9 @@
+sudo keytool -keystore cacerts -importcert -alias HuaweiITRootCA -file /home/newdisk2/lxn/HuaweiITRootCA.cer -storepass changeit
+
+sudo keytool -keystore cacerts -importcert -alias HWITEnterpriseCA1 -file /home/newdisk2/lxn/HWITEnterpriseCA1.cer -storepass changeit
+
+sudo keytool -list -keystore cacerts
+
+keytool 删除证书
+sudo keytool -delete -alias HuaweiITRootCA -keystore cacerts
+sudo keytool -delete -alias HWITEnterpriseCA1 -keystore cacerts

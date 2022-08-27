@@ -1,0 +1,47 @@
+************************************build-ms.sh***************************************************
+function getTiming(){ 
+    start=$1
+    end=$2
+  
+    start_s=$(echo $start | cut -d '.' -f 1)
+    start_ns=$(echo $start | cut -d '.' -f 2)
+    end_s=$(echo $end | cut -d '.' -f 1)
+    end_ns=$(echo $end | cut -d '.' -f 2)
+
+
+    time=$(( ( 10#$end_s - 10#$start_s ) * 1000 + ( 10#$end_ns / 1000000 - 10#$start_ns / 1000000 ) ))
+
+    echo "$time ms"
+} 
+start=$(date +%s.%N)
+make clean
+make
+end=$(date +%s.%N)
+result=$(getTiming $start $end) 
+echo $result
+
+
+***************************************build-s.sh******************************************
+starttime=`date +'%Y-%m-%d %H:%M:%S'`
+make clean
+make
+endtime=`date +'%Y-%m-%d %H:%M:%S'`
+start_seconds=$(date --date="$starttime" +%s);
+end_seconds=$(date --date="$endtime" +%s);
+echo "本次运行时间： "$((end_seconds-start_seconds))"s"
+
+
+**************************************build-us.sh*******************************************
+function handle()
+{
+start=$(date +%s%N)
+start_ms=${start:0:16}
+make clean
+make
+end=$(date +%s%N)
+end_ms=${end:0:16}
+echo "cost time is:"
+echo "scale=6;($end_ms - $start_ms)/1000000" | bc
+}
+ 
+handle

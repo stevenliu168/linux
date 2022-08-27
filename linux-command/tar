@@ -1,0 +1,22 @@
+Linux下的tar压缩解压缩命令详解
+https://www.cnblogs.com/lhm166/articles/6604852.html
+
+tar命令不带根目录压缩的方法是：
+假如想压缩/root/temp/temp1目录下的所有文件和文件夹及子文件夹的任何东西，并把压缩文件放到/root/temp/temp2下，文件名叫1.tat.gz
+先
+cd /root/temp/temp1
+再
+tar zcf /root/temp/temp2/1.tar.gz *
+此时就OK了。
+
+解压时先进入目标目录，再
+tar zxf /root/temp/temp2/1.tar.gz
+即可。
+
+
+https://blog.csdn.net/weixin_39554290/article/details/116956222
+linux解压后缀为.xz,xz后缀名文件解压方法
+后缀名为xz的这种文件是使用tar打包后再压缩生成的。解压方法是：
+1、xz -d **.tar.xz
+2、tar -xvf **.tar
+如没有按照xz工具，则首先需要下载、安装xz工具：

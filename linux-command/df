@@ -1,0 +1,7 @@
+df -h 查看硬盘空间
+du －h –max-depth=1 /var/log/* 查看/var/log路径下文件的大小
+
+search key:cannot create temp file for here-document:
+
+cannot create temp file for here-document: No space left on device
+https://blog.csdn.net/u010499619/article/details/52232225

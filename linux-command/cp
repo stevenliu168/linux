@@ -1,0 +1,26 @@
+————————————————————————————————————————————————————————————————————————————————————————————————
+search key:linux cp 所有文件和子目录
+
+https://blog.csdn.net/yukuleshui/article/details/111493562
+Linux中拷贝目录及其子目录所有文件
+cp命令拷贝当前目录以及子目录下的所有文件
+忽略当前文件中的隐藏文件
+cp   -r   /usr/* /test1/
+
+完整复制所有文件
+cp   -r   /usr/. /test1/
+————————————————————————————————————————————————————————————————————————————————————————————————
+search key:linux cp 复制文件到当前目录 并改名
+
+https://www.csdn.net/tags/OtDaYgxsMzA5NC1ibG9n.html
+1 复制文件到当前目录并重命名
+比如；
+我们想把 my_file 这个单个的文件重命名为 my_copy_file 并复制到当前目录；
+cp my_file ./my_copy_file
+其中，./ 表示当前目录；
+
+2 复制文件夹到当前目录并重命名
+比如；
+我们想把 my_file_dir 这个文件夹重命名为 my_copy_file_dir 并复制到当前目录；
+cp -r my_file_dir/ ./my_copy_file_dir/
+与上面不同的是，-r 表示递归，是对多个文件的操作；

@@ -1,0 +1,152 @@
+ ____________________________________________________________________________________________________________
+ ps -ef |grep Global
+ ____________________________________________________________________________________________________________
+  
+  
+  
+  
+ ____________________________________________________________________________________________________________
+ 
+https://www.cnblogs.com/annatest/p/15035413.html
+Linux命令之ps命令
+所谓的进程，通俗的说，就是当前正在执行的一个程序。
+
+在Linux系统中，ps（process status），常常用来列出系统中当前运行的进程，类似于windows的任务管理器。要对进程进行检测和控制，首先必须要了解当前进程的情况，也就是需要查看当前进程，而ps命令就是最基本同时也是非常强大的进程查看命令。使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵死、哪些进程占用了过多的资源等等。总之大部分信息都是可以通过执行该命令得到的。
+
+ps工具标识进程的5种状态码:
+
+R 运行 runnable (on run queue)
+S 中断 sleeping
+D 不可中断 uninterruptible sleep (usually IO)
+T 停止 traced or stopped
+Z 僵死 a defunct (”zombie”) process
+ 
+
+ps 使用
+
+用法：ps [ 参数 ]
+
+ps命令有很多参数，具体如下：
+
+-A 显示所有进程（等价于-e）(utility)
+-a 显示一个终端的所有进程，除了会话引线
+-N 忽略选择。
+-d 显示所有进程，但省略所有的会话引线(utility)
+-x 显示没有控制终端的进程，同时显示各个命令的具体路径。dx不可合用。（utility）
+-p pid 进程使用cpu的时间
+-u uid or username 选择有效的用户id或者是用户名
+-g gid or groupname 显示组的所有进程。
+U username 显示该用户下的所有进程，且显示各个命令的详细路径。如:ps U zhang;(utility)
+-f 全部列出，通常和其他选项联用。如：ps -fa or ps -fx and so on.
+-l 长格式（有F,wchan,C 等字段）
+-j 作业格式
+-o 用户自定义格式。
+v 以虚拟存储器格式显示
+s 以信号格式显示
+-m 显示所有的线程
+-H 显示进程的层次(和其它的命令合用，如：ps -Ha)（utility）
+e 命令之后显示环境（如：ps -d e; ps -a e）(utility)
+h 不显示第一行
+--version 显示版本信息
+--help 显示帮助信息
+ 
+
+下面给大家举几个在日常生活中使用较多的ps命令。
+
+-w 显示加宽可以显示较多的资讯
+-au 显示较详细的资讯
+-aux 显示所有包含其他使用者的行程
+au(x) 输出格式 :
+
+USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
+USER: 用户名
+PID: 进程ID（Process ID）
+%CPU: 进程的 CPU 占有率
+%MEM: 进程的内存占用率
+VSZ: 进程所使用的虚拟内存的大小（Virtual Size）
+RSS: 进程使用的驻留集大小或者是实际内存的大小，Kbytes字节（RSS 是常驻内存集（Resident Set Size），表示该进程分配的内存大小）
+RSS 不包括进入交换分区的内存。
+
+RSS 包括共享库占用的内存（只要共享库在内存中）
+
+RSS 包括所有分配的栈内存和堆内存。
+
+TTY: 与进程关联的终端(minor device number of tty)
+STAT: 该行程的状态（）:
+
+D: 无法中断的休眠状态 (通常 IO 的进程)
+R: 正在执行中
+S: 静止状态
+T: 暂停执行
+Z: 不存在但暂时无法消除
+W: 没有足够的记忆体分页可分配
+<: 高优先序的行程
+N: 低优先序的行程
+L: 有记忆体分页分配并锁在记忆体内 (实时系统或捱A I/O)
+START: 行程开始时间
+TIME: 进程使用的总cpu时间
+COMMAND:正在执行的命令行命令
+ 
+
+1、ps -aux
+
+最常用的方法是ps -aux（或者ps au），然后再利用一个管道符号导向到grep去查找特定的进程，然后再对特定的进程进行操作。
+
+如果想跟踪cpu占用率和内存占用率, aux是个不错的选择
+
+如果想跟踪父进程和完整的启动命令 ef是个好选择
+
+ 
+
+ps -ef|grep详解（查找指定进程）：
+
+ps命令将某个进程显示出来，grep命令是查找，中间的|是管道命令，是指ps命令与grep命令同时进行
+
+ps命令是Linux下最常用的也是非常强大的进程查看命令
+
+grep是查找，是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。
+
+rep全称是Global Regular Expression Print，表示全局正则表达式版本，它的使用权限是所有用户。
+
+以下这条命令是检查java 进程是否存在：ps -ef |grep java
+
+ 
+
+字段含义如下：
+UID       PID       PPID      C     STIME    TTY       TIME         CMD
+
+ zzw      14124   13991      0     00:38      pts/0      00:00:00    grep --color=auto dae
+
+ 
+
+UID      ：用户ID（User ID）
+
+PID      ：进程ID（Process ID）
+
+PPID    ：父进程的进程ID（Parent Process id）
+
+（说明：在 linux 中，使用 ps 打印进程及线程信息时， 实际上 PID 表示线程信息，而 PPID 表示该线程所属的进程信息。）
+
+C          ：CPU使用的资源百分比（CPU用户计算执行优先级的因子，数值越大CPU密集运算执行优先级越低）
+
+STIME ：启动时间
+
+TTY     ：与进程关联的终端（tty）（完整的终端名称）
+
+TIME   ：进程使用的总cpu时间
+
+CMD   ：正在执行的命令行命令
+
+ps -ef是用标准的格式显示进程；
+ 
+
+参考：
+
+https://www.cnblogs.com/freinds/p/8074651.html
+
+https://www.runoob.com/linux/linux-comm-ps.html
+
+https://www.linuxidc.com/Linux/2020-02/162252.htm 
+____________________________________________________________________________________________________________
+ 
+

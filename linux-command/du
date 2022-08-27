@@ -1,0 +1,11 @@
+du：查询文件或文件夹的磁盘使用空间
+du -sh *
+du -sh /app/*
+du -h --max-depth=1 .
+du -h --max-depth=1 ./newdisk2
+du -h --max-depth=1 ./newdisk
+du -h --max-depth=1 --exclude="newdisk"
+
+search key:linux查看文件夹大小命令
+https://blog.csdn.net/m0_67393039/article/details/123654401
+https://blog.csdn.net/weixin_42031299/article/details/122292115

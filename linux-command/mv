@@ -1,0 +1,10 @@
+例子：将目录A重命名为B
+mv A B
+
+例子：将/a目录移动到/b下，并重命名为c
+mv /a /b/c
+
+search key:ubuntu 重命名文件夹
+
+linux 重命名文件和文件夹
+https://www.cnblogs.com/mafeng/p/8000355.html

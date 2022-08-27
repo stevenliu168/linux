@@ -1,0 +1,24 @@
+https://www.cnblogs.com/liyanghui/p/12747608.html
+ubuntu命令行下载 网站文件
+下载到当前文件夹
+wget "http://..." 
+下载到指定文件夹
+wget -P ~/Downloads/ "http://..." 
+以指定文件名下载到指定目录
+wget -O ~/Downloads/new_filename "http://..." 
+
+
+https://blog.csdn.net/zhuohui307317684/article/details/111028290
+ubuntu命令行下的下载文件的方法
+参考： https://www.cnblogs.com/confessionlouis/p/9763512.html
+原文有更详细的说明。
+ 
+使用wget下载单个文件 
+
+以下的例子是从网络下载一个文件并保存在当前目录
+wget http://cn.wordpress.org/wordpress-3.1-zh_CN.zip 
+
+在下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。 
+curl -O http://man.linuxde.net/text.iso                    #O大写，不用O只是打印内容不会下载
+wget http://www.linuxde.net/text.iso                       #不用参数，直接下载文件
+————————————————

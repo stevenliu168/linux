@@ -1,0 +1,26 @@
+https://baike.baidu.com/item/realpath/2895213?fr=aladdin
+realpath是用来将参数path所指的相对路径转换成绝对路径，然后存于参数resolved_path所指的字符串数组或指针中的一个函数。
+如果resolved_path为NULL，则该函数调用malloc分配一块大小为PATH_MAX的内存来存放解析出来的绝对路径，并返回指向这块区域的指针。程序员应调用free来手动释放这块内存。 [1-2] 
+中文名
+    realpath
+相关函数
+     readlink, getcwd
+表头文件
+     #include  <limits.h>
+返回值
+    失败返回NULL
+realpath函数原型
+   char *realpath(const char *path, char *resolved_path)
+realpath返回值
+    成功则返回指向resolved_path的指针，失败返回NULL，错误代码存于errno
+realpath范例
+#include <unistd.h>
+main() 
+{
+    char resolved_path[80];
+    realpath("/usr/X11R6/lib/modules/../../include/../",resolved_path);
+    printf("resolved_path: %s\n", resolved_path);
+}
+
+用realpath对文件路径进行标准化处理
+https://www.jianshu.com/p/f493768ea573?utm_source=oschina-app

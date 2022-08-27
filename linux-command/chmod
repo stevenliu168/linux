@@ -1,0 +1,9 @@
+chmod u+x auto-update.sh
+
+
+修改指定目录下的所有文件的权限为全体可读、可修改、可执行
+chmod -R 777 apache-tomcat-8.5.20/
+chmod -R 777 *.*
+
+修改当前目录下的err子目录的权限为全体可读、可修改、可执行
+chmod -R 777 ./errhttps://github.com/stevenliu168/notes

@@ -1,0 +1,56 @@
+search key:ubuntu 给普通用户增加sudo权限
+
+https://blog.csdn.net/Stay_Enjoy/article/details/79919605
+linux Ubuntu，给普通用户增加sudo权限
+1、切回root
+2、vi etc/sudoers
+3、在打开的文件中找到这一行：root ALL=(ALL) ALL
+   在这一行的后面加上：username ALL=(ALL) ALL
+   其中username是你想加sudo权限的普通用户的用户名、
+4、按esc键，敲：wq保存退出即可
+
+https://blog.csdn.net/kan2016/article/details/90715197
+ubuntu给用户添加sudo权限
+1. 给用户添加sudo权限
+(1)设置sudo密码
+
+sudo passwd
+(2)进入超级用户模式
+
+su -
+(3)添加文件的写权限
+
+chmod u+w /etc/sudoers
+(4)编辑/etc/sudoers文件
+
+vim /etc/sudoers
+在“root    ALL=(ALL:ALL) ALL” 下一行添加
+
+kang    ALL=(ALL:ALL) ALL
+如图：
+
+2.设置sudo为不需要密码
+(1)在“%sudo   ALL=(ALL:ALL) ALL” 下一行添加
+
+kang    ALL=(ALL:ALL) NOPASSWD:ALL
+如图：
+
+(2)撤销文件的写权限
+
+chmod u-w /etc/sudoers
+(3)新打开的终端不用再输入sudo密码
+
+3.几个问题解释：
+
+(1)为什么用su - 而不用su ？
+
+用命令"su"的时候只是切换到root，但没有把root的环境变量传过去，还是当前用户的环境变量；
+
+用"su -"命令将环境变量也一起带过去，就象和root登录一样。
+
+(2)为什么设置sudo为不需要密码时，要加入NOPASSWD，有什么区别？
+
+kang   ALL=(ALL:ALL) ALL 表示默认5分钟后刚才输入的sodo密码过期，下次sudo需要重新输入密码
+
+kang    ALL=(ALL:ALL) NOPASSWD:ALL  表示允许无时间限制的免输入密码，个人用户的使用一般是安全的
+————————————————

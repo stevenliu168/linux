@@ -1,0 +1,7 @@
+将./lxn目录的拥有者改为lxn
+sudo chown -R lxn:lxn ./lxn
+
+chown -R lxn:lxn ./ARMNative
+
+将GlobalCache文件设置为globalcache组的globaacache用户拥有
+chown globalcache:globalcache GlobalCache

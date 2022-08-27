@@ -1,0 +1,36 @@
+https://www.cnblogs.com/wt645631686/p/8359532.html
+
+Linux远程拷贝scp命令
+Linux的scp命令可以实现两台服务器之间互相拷贝文件，我的测试环境是Centos6.4.
+
+基本的命令格式
+
+scp 拷贝目标文件  远程用户@远程主机地址:远程目录
+一、从本机拷贝到目标远程主机
+
+# scp php-7.2.4.tar.gz root@192.168.9.142:/usr/local/src/   //这里是从当前主机拷贝到IP位142的局域网主机目录/usr/local/src下
+The authenticity of host '192.168.9.142 (192.168.9.142)' can't be established.
+RSA key fingerprint is 11:b6:be:81:a0:be:b7:14:b4:2d:d6:99:de:8d:7c:f1.
+Are you sure you want to continue connecting (yes/no)? yes     //输入回车会弹出提示，然后输入yes回车
+root@192.168.9.142's password:    //输入密码即可
+执行完成之后，去目标远程主机对应目录查看，文件在，说明成功
+
+二、从远程主机拷贝到本机
+
+# scp root@192.168.9.142:/usr/local/src/redis.tar.gz /usr/local/src/  //这里是从目标主机142拷贝文件到本机/usr/local/src下
+root@192.168.9.142's password:   //输入远程主机密码回车即可
+redis.tar.gz                                            100% 1696KB   1.7MB/s   00:00 
+补充、一次拷贝多个文件或者目录
+
+# scp root@192.168.9.142:/usr/local/src/cp_dir/*.php /usr/local/src/  //拷贝多个文件
+# scp -r root@192.168.9.142:/usr/local/src/cp_dir/ /usr/local/src/   //拷贝目录
+
+
+//拷贝10.67.164.228机子上的/home/newdisk2/lxn/VMIEngine/out/native/release_imgs/InstructionPhoneServer.tar.gz到当前目录
+scp root@10.67.164.228:/home/newdisk2/lxn/VMIEngine/out/native/release_imgs/InstructionPhoneServer.tar.gz ./
+
+//拷贝10.67.165.36机子上的/home/lxn目录下的所有文件到当前目录
+scp root@10.67.165.36:/home/lxn/* ./
+
+//拷贝10.67.165.40机子上的/home/tyh目录到当前目录
+scp -r root@10.67.165.40:/home/tyh/ ./

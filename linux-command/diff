@@ -1,0 +1,7 @@
+cp -rpf frameworksAv9 frameworksAv9_new
+diff -Nur frameworksAv9 frameworksAv9_new
+diff -Nur frameworksAv9 frameworksAv9_new > huawei_0010_audioflinger.patch
+ 
+cp -rpf frameworksAv frameworksAv_new
+diff -Nur frameworksAv frameworksAv_new
+diff -Nur frameworksAv frameworksAv_new > huawei_0007_audioflinger.patch

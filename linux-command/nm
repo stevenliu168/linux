@@ -1,0 +1,16 @@
+nm -D libInstructionEngine.so | grep VmiGlActiveTexture
+nm -D libInstructionEngine.so >> 1.txt
+objdump -tT libInstructionEngine.so >> 2.txt
+
+
+https://www.cnblogs.com/jiftle/p/12356145.html
+Linux 查看.so中导出函数
+方法一
+nm -D **.so
+
+但这样能看到所有的导出，乱七八糟的很多，筛选用：
+
+nm **.so | grep XX
+
+方法二
+objdump -tT **.so
