@@ -1,0 +1,214 @@
+search key:ubuntu 查看gcc安装目录
+
+linux下gcc安装
+https://blog.csdn.net/g200407331/article/details/90635946
+
+linux查询gcc安装路径,linux下重新安装特定版本的gcc
+https://blog.csdn.net/weixin_39725403/article/details/116789693
+
+http://3ms.huawei.com/km/blogs/details/9721099
+gcc + cmake + openssl
+1. gcc安装
+见附件
+
+将gcc-9.3.0.tar.xz复制到Linux中(https://mirrors.ustc.edu.cn/gnu/gcc/)
+
+tar -xvf gcc-9.3.0.tar.xz
+
+将四个压缩包复制到gcc的解压目录
+mv gmp-6.1.0.tar.bz2 gcc-9.3.0
+mv isl-0.18.tar.bz2 gcc-9.3.0(http://www.mirrorservice.org/sites/sourceware.org/pub/gcc/infrastructure/)
+mv mpc-1.0.3.tar.gz gcc-9.3.0
+mv mpfr-3.1.4.tar.bz2 gcc-9.3.0
+
+vim ./contrib/download_prerequisites
+确认上述依赖压缩包版本是否一致。
+
+在gcc源代码文件夹中执行命令./contrib/download_prerequisites
+
+在源代码（解压后的文件）上层目录新建目录 mkdir gcc_install
+
+cd gcc_install
+
+../gcc-9.3.0/configure --enable-checking=release --enable-languages=c,c++ --disable-multilib
+
+执行编译命令
+make -j32
+
+执行安装命令（必须root权限）
+make install
+
+安装完成，执行gcc –v查看版本
+
+cmake安装
+tar -xvf cmake-3.14.5.tar
+cd cmake-3.14.5
+./bootstrap
+make
+make install
+常见问题：
+gmake: “cmake”是最新的。
+/usr/soft/cmake-3.5.1/Bootstrap.cmk/cmake: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21’ not found (required by /usr/soft/cmake-3.5.1/Bootstrap.cmk/cmake)
+链接：https://blog.csdn.net/tan88881111/article/details/80104346?utm_source=blogxgwz5
+链接：https://blog.csdn.net/qq_35398033/article/details/106457777
+strings /usr/lib64/libstdc++.so.6|grep GLIBCXX
+找到合适的libstdc++.so.6，并移到lib64目录
+cp /usr/local/lib64/libstdc++.so.6 /usr/lib64/
+
+openssl
+https://www.openssl.org/source/
+tar xzvf openssl-1.1.0-pre1.tar.gz
+./configure
+make
+sudo make install
+常见问题：
+解决openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory错误
+
+在root用户下执行：
+ln -s /usr/local/lib64/libssl.so.1.1 /usr/lib64/libssl.so.1.1
+ln -s /usr/local/lib64/libcrypto.so.1.1 /usr/lib64/libcrypto.so.1.1
+
+http://3ms.huawei.com/km/blogs/details/6023071
+升级gcc到华为PDM库中新版本7.3.0
+1、PDM：http://pdm.huawei.com/Windchill/navigator/index.htm#tab:menu_index
+搜索gcc编号：05912828
+下载必要的安装包gcc-7.3.0.tar.gz、gmp-6.1.0.tar.bz2、mpfr-3.1.4.tar.bz2、mpc-1.0.3.tar.gz
+
+2、安装gmp-6.1.0.tar.bz2
+#tar jxvf gmp-6.1.0.tar.bz2
+# mkdir /usr/local/gmp-6.1.0
+#./configure --prefix=/usr/local/gmp-6.1.0
+# make （编译）
+# make install （执行安装）
+
+3、安装mpfr-3.1.4
+# tar jxvf mpfr-3.1.4.tar.bz2
+# mkdir /usr/local/mpfr-3.1.4
+# cd /usr/local/mpfr-3.1.4
+# ./configure --prefix=/usr/local/mpfr-3.1.4 --with-gmp=/usr/local/gmp-6.1.0
+（注意配置的时候要把依赖关系选项加进去）
+# make
+# make install
+
+4、安装mpc-1.0.3
+# tar -xzvf gmpc-1.0.3.tar.gz
+# mkdir /usr/local/mpc-1.0.3
+# cd /usr/local/mpc-1.0.3
+# ./configure --prefix=/usr/local/mpc-1.0.3 --with-gmp=/usr/local/gmp-6.1.0 --with-mpfr=/usr/local/mpfr-3.1.4
+# make
+# make install
+
+5、再次安装GCC 配置安装选项
+# cd /usr/local/gcc-7.3.0
+# ./configure --prefix=/usr/local/gcc-7.3.0 -enable-threads=posix -disable-checking -disable-multilib -enable-languages=c,c++ --with-gmp=/usr/local/gmp-6.1.0 --with-mpfr=/usr/local/mpfr-3.1.4 --with-mpc=/usr/local/mpc-1.0.3
+
+6、编译安装Gcc
+# make
+#make install
+
+编译过程有报错：
+1、uint64_t、int64_t找不到，需要安装g++ . suse系统仓库中有g++，运行cnf g++，zypper install g++  可以直接安装
+
+http://3ms.huawei.com/km/blogs/details/6116547
+gcc-7.3.0安装
+gcc-7.3.0依赖
+gmp-6.1.0
+mpfr-3.1.4
+mpc-1.0.3
+isl-0.16.1
+服务包获取pdm编码：05912828
+安装步骤
+创建安装路径，可自定义
+mkdir -p /opt/buildtools
+1 安装gmp
+tar -jxvf gmp-6.1.0.tar.bz2
+pushd gmp-6.1.0
+./configure --prefix=/opt/buildtools/gmp-6.0.1
+make && make install
+popd
+2 安装mpfr
+tar -zxvf mpfr-3.1.4.tar.gz
+pushd mpfr-3.1.4
+./configure --prefix=/opt/buildtools/mpfr-3.1.4 --with-gmp=/opt/buildtools/gmp-6.0.1
+make && make install
+popd
+3 安装mpc
+tar -zxvf mpc-1.0.3.tar.gz
+pushd mpc-1.0.3
+./configure --prefix=/opt/buildtools/mpc-1.0.3 --with-gmp=/opt/buildtools/gmp-6.0.1 -with-mpfr=/opt/buildtools/mpfr-3.1.4
+make && make install
+popd
+4 安装isl
+tar -jxvf isl-0.16.1.tar.bz2
+pushd isl-0.16.1
+./configure --prefix=/opt/buildtools/isl-0.16.1 --with-gmp-prefix=/opt/buildtools/gmp-6.0.1
+make && make install
+source /etc/profile
+ldconfig
+5 安装gcc
+tar -zxvf gcc-7.3.0.tar.gz
+pushd gcc-7.3.0
+./configure --prefix=/opt/buildtools/gcc-7.3.0 --enable-threads=posix --disable-checking --enable-multilib --enable-languages=c,c++ --with-gmp=/opt/buildtools/gmp-6.0.1
+--with-mpfr=/opt/buildtools/mpfr-3.1.4 --with-mpc=/opt/buildtools/mpc-1.0.3 --with-system-zlib
+make -j4 && make install
+popd
+ln -s /opt/buildtools/gcc-7.3.0/bin/gcc /usr/local/bin/gcc
+ln -s /opt/buildtools/gcc/gcc-7.3.0/bin/g++ /usr/local/bin/g++
+验证
+gcc --version
+
+常见问题
+1. /usr/include/gnu/stubs.h:7:11: fatal error: gnu/stubs-32.h: No such file or
+解决方法：参考http://3ms.huawei.com/km/blogs/details/6116489?l=zh-cn
+2. checking dynamic linker characteristics... configure: error: Link tests are not allowed after GCC_NO_EXECUTABLES.
+make[2]: *** [Makefile:11925: configure-stage1-zlib] Error 1
+make[2]: Leaving directory '/home/tools/gcc/gcc-7.3.0'
+make[1]: *** [Makefile:22759: stage1-bubble] Error 2
+
+解决方法：gcc configure时添加参数--with-system-zlib
+
+http://3ms.huawei.com/km/blogs/details/9303915
+gcc版本切换--超实用
+因测试高版本的原因，Centos7.6 安装了gcc4.8.5，发现测试有需要高版本gcc7.3.0，故需要切换为高版本。
+1.查找环境gcc版本包
+
+    find  /usr  -name  gcc
+    
+    看上图有，再查看：
+    
+    确实有两个gcc版本
+2.执行（以）
+   mkdir -p /usr/local/gcc-7.3.0
+   mv /usr/local/bin/gcc /usr/local/bin/gcc-7.30
+   ln -s /usr/bin/gcc /usr/local/bin/gcc-7.3.0
+
+与此同时，g++, c++这2个命令也要改
+
+   mkdir -p /usr/local/bin/g++-7.3.0
+   mv /usr/bin/local/g++ /usr/local/bin/g++-7.3.0
+   ln -s /usr/bin/g++ /usr/local/bin/g++
+   mkdir -p /usr/local/bin/c++-7.3.0
+   mv /usr/local/bin/c++ /usr/local/bin/c++-7.3.0
+
+反之也成立
+
+http://3ms.huawei.com/km/blogs/details/8123009
+Linux升级make版本
+若机器上未安装make,则直接安装make4.2.1。借鉴：http://3ms.huawei.com/km/groups/1505773/blogs/details/7168553
+
+本文主要讲将机器上已有的make 3.82升级为make 4.2.1（其他版本应该也适用）
+
+1.下载make-4.2.1.tar.gz源码包上传到/opt目录下并解压
+2. cd /opt/make-4.2.1
+3. ./configure，则会发现make-4.2.1下生成make文件
+4. make 执行make
+5. ./make 执行4生成的make
+6. ./make -v 会发现make 4.2.1已安装完成，只是在/opt/make-4.2.1目录下适用
+7. make -v 会发现make 3.82也存在，make 3.82是全局适用的
+
+8. 此时就需要用make 4.2.1替换掉make 3.8.2
+    which make 找到make所在路径 ：/usr/bin/make
+    替换：
+    mv /usr/bin/make /usr/bin/make.bak
+    cp /opt/make-4.2.1/make /usr/bin
+9. 此时make --version就会发现make版本已经是4.2.1啦
