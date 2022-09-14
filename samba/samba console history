@@ -1,0 +1,34 @@
+    1  pwd
+    2  history
+    3  pwd
+    4  ls
+    5  ll
+    6  pwd
+    7  samba
+    8  sudo vi /etc/samba/smb.conf
+    9  /sbin/service smb restart
+   10  whereis smb
+   11  smb
+   12  service smb
+   13  service smb restart
+   14  service smb start
+   15  /etc/init.d/smbd
+   16  /etc/init.d/smbd restart
+   17  sudo vi /etc/samba/smb.conf
+   18  /etc/init.d/smbd restart
+   19  testparm
+   20  smbpasswd
+   21  smbpasswd -a lxn
+   22  sudo smbpasswd -a lxn
+   23  smbpasswd -x lxn
+   24  sudo smbpasswd -x lxn
+   25  sudo vi /etc/samba/smb.conf
+   26  smbpasswd -a root
+   27  service smbd restart
+   28  sudo smbpasswd -a lxn
+   29  service smbd restart
+   30  sudo vi /etc/samba/smb.conf
+   31  service smbd restart
+   32  sudo smbpasswd -a lxn
+   33  service smbd restart
+   34  sudo service smbd restart
