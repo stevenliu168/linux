@@ -1,0 +1,26 @@
+#!/system/bin/sh
+
+function prepare_filesystem() {
+
+       #  prepare permission for devices
+
+       #  copy /system/etc files to /etc
+       cp -r -p /system/etc/* /etc/
+
+       #  mkdir /dev/input for eventX device
+       mkdir -p /dev/input
+       #  Hook cpuinfo
+       if [ -e "/hook_cpuinfo.sh" ] ; then
+           sh /hook_cpuinfo.sh
+       fi
+      # setprop ro.hardware.gralloc ranchu
+      # setprop ro.hardware.hwcomposer goldfish
+      # setprop ro.hardware.audio.primary goldfish
+}
+prepare_filesystem &
+
+echo "Waiting for filesystem being prepared ..."
+wait $!
+
+echo "Starting real init now ..."
+/init
