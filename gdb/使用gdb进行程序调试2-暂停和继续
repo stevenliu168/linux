@@ -1,0 +1,248 @@
+https://www.cnblogs.com/homeX/p/5472895.html
+
+使用gdb进行程序调试2-暂停和继续
+ 
+
+/******************************************************************
+
+ * 本文为博主学习《Debugging with GDB》的读书笔记，版权所有，转载请注明出处。
+
+ *
+
+ ******************************************************************/
+
+ 
+
+暂停和继续
+
+info program:
+
+　　查看程序的当前状态。
+
+一、Breakpoint
+
+break location
+
+break
+
+break ... if cond:
+
+　　在某个位置或当前位置设置断点；设置条件断点。
+
+condition bnum expression:
+
+　　设置breakpoint或者watchpoint的生效条件。
+
+condition bnum：
+
+　　取消breakpoint或者watchpoint的生效条件。
+
+tbreak location：
+
+　　设置临时断点，只生效一次。
+
+hbreak location
+
+thbreak location
+
+rbreak regex
+
+break file:regex:
+
+　　设置（临时）硬件相关（hardware-assisted）断点，根据正则表达式设置断点。
+
+info break [n...]:
+
+　　　查看断点状态。
+
+clear：
+
+　　删除一下指令设置的断点，在跳到某一段点同时需要删除该断点时非常有用。
+
+clear location：
+
+　　删除某个位置的断点。
+
+dlelete [breankpoint] [range ...]：
+
+　　删除某些断点，直有一个参数，比如del 3， del1-3。如果不加参数，删除所有断点。
+
+disable [breankpoint] [range ...]:
+
+　　设置断点无效。
+
+enable [breakpoing] [range ...]:
+
+　　设置断点生效。
+
+ 
+
+二、watchpoint和catchpoint
+
+watchpoing、catchpoing和breakpoint一起编号，一些关于breakpoing相关的命令同样适用于watchpoing和catchpoing，比如info、disable、del等。
+
+watch [-l|-location] expr [thread thread-id] [mask maskvalue]:
+
+　　设置watchpoint。
+
+catch event
+
+　　event可以是这些：
+
+　　assert、exec、syscall [name | number]、fork、vfork、load、upload、signal [signal ..| 'all']
+
+ 
+
+三、断点命令表
+
+　　可以在断点后设置cmd list，当中断时，执行gdb命令。
+
+commands [range ...]
+
+... command list
+
+end
+
+比如：
+
+　　break foo if x > 0
+
+　　commands
+
+　　silent
+
+　　print "x is %d\n", x
+
+　　cont
+
+　　end
+
+ 
+
+四、继续执行
+
+continue
+
+c
+
+fg：
+
+　　程序继续执行。
+
+step
+
+step [count]:
+
+　　单步运行，或者count步运行。
+
+next
+
+next [count]:
+
+　　next与step的区别是在遇到函数调用时，step会进入子函数，而next不会。
+
+finish：
+
+　　执行完本函数并暂停。
+
+return [val]：
+
+　　直接返回到上层调用函数，本函数剩余部分不再执行。　　　　
+
+until：
+
+　　跳出本条语句，在循环中执行到循环外。
+
+until location:
+
+　　执行到location或者从当前栈帧返回。
+
+advance location：
+
+　　向前执行到location位置。
+
+stepi/nexti
+
+　　执行一条机器指令并停止。
+
+ 
+
+五、跳过函数和文件
+
+　　下面这个例子中，你想直接进入foo函数的话有点困难，这个时候需要跳过函数。
+
+　　int func(){
+
+　　　　foo(boring());
+
+　　　　bar(boring());
+
+　　}
+
+skip function [linespec]:
+
+　　在调试时，跳过名为linespec的函数。
+
+skip file [filename]:
+
+　　在filename中所有的函数都被跳过。
+
+ skips可以被删除、禁用等。
+
+info skip [range]
+
+skip delete [range]
+
+skip enable [range]
+
+skip disable [range]
+
+ 
+
+六、信号
+
+　　在调试时，当程序收到信息，gdb的默认操作是:对于SIGALRM、SIGWINCH、SIGCHLD信号，nostop、noprint、pass，即不中断程序、不打印输出信号信息、允许信息发送给程序，这样程序可以收到这三个信号；对于其它错误信号，操作为stop、print、pass，即打印输出信号信息并且中断程序，如果继续执行，则信号会传递给程序。
+
+　　在打印输出中断信息、中断程序时，信号其实还没有传递给程序。这个时候可以更改信号处理方式。
+
+info handle　　　　: 显示信号handle设置
+
+info signal sig　　  : 显示制定的信号handle设置
+
+catch signal [signal ...| 'all'] ： 设置catchpoing
+
+handle signal [keywords]　　： 处理信号方式设置，可以选择的option有nostop/stop、print/noprint、pass(ignore)/nopass(noignore)三组方式。
+
+　　在signal中断时，如果中断设置为nostop，在执行next/step/stepi时，会跳过中断处理函数；而如果中断设置为sotp，在在执行setp/stepi时，会进入到中断处理函数。
+
+可以通过signal sig和queue-signal sig命令给程序发送信号，如果参数为0，则为清除当前信号，程序继续执行。
+
+ 
+
+七、多线程的断点
+
+　　有两种控制线程运行的模式：all-stop mode和non-stop mode，在all-stop模式中，所有线程同时stop，执行step/next时，所有线程同时运行，但是不保证所有线程都是单步运行。
+
+set non-stop on
+
+set non-stop off
+
+show non-stop：
+
+　　设置是否启用non-stop模式，以及查询当前模式。
+
+　　可以通过&设置程序在后台执行，比如c &， r&；在程序后台执行时，可以通过interrup [-a]中断程序。
+
+　　在多线程程序中，可以制定断点在哪个线程中中断：
+
+break location thread thread-id
+
+ 
+
+/******************************************************************
+
+ * 本文为博主学习《Debugging with GDB》的读书笔记，版权所有，转载请注明出处。
+
+ *
+
+ ******************************************************************/
