@@ -36,3 +36,11 @@ linux解压后缀为.xz,xz后缀名文件解压方法
 1、xz -d **.tar.xz
 2、tar -xvf **.tar
 如没有按照xz工具，则首先需要下载、安装xz工具：
+
+
+
+search key:tar解压到指定目录
+https://blog.csdn.net/wb4916/article/details/117772307
+一、解压.tar.gz格式到指定的目录下：
+命令格式为：tar -zxvf 【压缩包文件名.tar.gz】 -C  【路径】/
+例如：tar -zxvf japan.tar.gz -C /tmp/
