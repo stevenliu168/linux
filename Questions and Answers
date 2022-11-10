@@ -5,3 +5,56 @@ https://www.cnblogs.com/Jarvansi/p/16332678.html
 
 linux测试网络延时软件
 https://www.csdn.net/tags/MtTaYg3sODE1ODYtYmxvZwO0O0OO0O0O.html
+_______________________________________________________________________________________________________________________________
+
+search key:ubuntu 查看cpu型号
+
+ubuntu18查看cpu信息
+https://www.cnblogs.com/zizz/p/15753181.html
+1、第一种查法
+查看当前操作系统内核信息
+name -a
+查看cpu型号
+cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+查看cpu运行模式
+getconf LONG_BIT
+查看cpu是否支持64bit
+cat /proc/cpuinfo | grep flags | grep ' lm ' | wc -l
+查看cpu信息概要
+lscpu
+查看cpu相关的所有信息
+cat /proc/cpuinfo
+2、第二种查法
+cat /proc/cpuinfo| grep "cpu cores"|uniq                #查看每个物理cpu中core的个数即核数
+cpu cores	: 6
+cat /proc/cpuinfo| grep "physical id"| sort| uniq|wc -l #查看物理cpu个数
+1
+cat /proc/cpuinfo| grep "processor"| wc -l              #查看逻辑cpu的个数
+12
+cat /proc/meminfo | grep MemTotal                       #查看内存
+MemTotal:       16230060 kB                             #大约为15.5GB
+
+Ubuntu 查看CPU信息
+https://blog.csdn.net/kxh123456/article/details/126610117
+_______________________________________________________________________________________________________________________________
+
+search key:linux 通过进程号查看文件
+
+linux 根据进程查看文件
+https://www.csdn.net/tags/MtTaEgysNDQ2NzMtYmxvZwO0O0OO0O0O.html
+1、用ps -ef |grep xxxxx 得到该进程的pid
+2、输入ls -l ,结果中 exe链接对应的就是可执行文件的路径
+$ ls -l /proc/18283
+以下是/proc目录中进程18283的信息
+/proc/18283 pid为N的进程信息
+/proc/18283/cmdline 进程启动命令
+/proc/18283/cwd 链接到进程当前工作目录
+/proc/18283/environ 进程环境变量列表
+/proc/18283/exe 链接到进程的执行命令文件
+/proc/18283/fd 包含进程相关的所有的文件描述符
+/proc/18283/maps 与进程相关的内存映射信息
+/proc/18283/mem 指代进程持有的内存，不可读
+/proc/18283/root 链接到进程的根目录
+/proc/18283/stat 进程的状态
+/proc/18283/statm 进程使用的内存的状态
+/proc/18283/status 进程状态信息，比stat/statm更具可读性
