@@ -52,8 +52,7 @@ Windows10访问Samba 提示“用户名密码不正确”
  https://blog.csdn.net/caoxin1206/article/details/126802833
  Ubuntu Samba smb 设置登录密码
  第一步：使用smbpasswd设置登陆密码
-sudo smbpasswd -a “系统的用户名”
-1 sudo vi /etc/samba/smb.conf
+1 sudo smbpasswd -a “系统的用户名”
 这个命令需要root权限。会提示输入两次密码。用户名可以直接使用登陆系统的用户名。
 
 第二步：修改配置文件
