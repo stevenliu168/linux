@@ -1,0 +1,36 @@
+https://blog.csdn.net/lu_embedded/article/details/55803500
+在Ubuntu中添加和删除PPA的软件源
+PPA，英文全称为 Personal Package Archives，即个人软件包档案。是 Ubuntu Launchpad 网站提供的一项源服务，允许个人用户上传软件源代码，通过 Launchpad 进行编译并发布为二进制软件包，作为 apt / 新立得（Synaptic）源供其他用户下载和更新。
+　　
+　　PPA 的一般形式是： ppa:user/ppa-name
+
+添加 PPA 源
+　　添加 PPA 源的命令为：sudo add-apt-repository ppa:user/ppa-name
+　　添加好记得要更新一下： sudo apt-get update
+
+删除 PPA 源
+　　删除 PPA 源的命令格式则为：sudo add-apt-repository -r ppa:user/ppa-name
+　　然后进入 /etc/apt/sources.list.d 目录，将相应 ppa 源的保存文件删除。
+　　最后同样更新一下：sudo apt-get update
+________________________________________________________________________________________________________________________________________________________________________________
+https://www.cnblogs.com/infodriven/p/16385739.html
+一、Apt来源
+在Ubuntu和所有其他基于Debian的发行版中，apt软件存储库在/etc/apt/sources.list文件中或目录下的单独文件中定义/etc/apt/sources.list.d/。
+
+/etc/apt/sources.list.d/目录内的存储库文件的名称必须以结尾.list。
+该/etc/apt/sources.list文件的常规语法采用以下格式：
+
+deb http://repo.tld/ubuntu distro component...
+该行的第一个条目定义了存档的类型。存档类型可以是deb或deb-src。Deb表示存储库中包含.deb软件包，而deb-src表示源软件包。
+第二个条目是存储库URL。
+第三个条目指定分发代码名称，例如beaver，xenial等。
+最后的条目是存储库组件或类别。默认的Ubuntu存储库分为四个部分-主组件，受限组件，Universe和multiverse。通常，第三方存储库只有一个类别。
+目录下文件的格式/etc/apt/sources.list.d/与常规sources.list文件的格式相同。
+大多数存储库都提供公用密钥，以对需要下载和导入的已下载软件包进行身份验证。
+
+为了能够添加或删除存储库，您需要以具有sudo访问权限或root用户的身份登录。
+
+通常，有关如何启用特定存储库的说明包含在软件文档中。
+
+二、安装add-apt-repository（找不到add-apt-repository命令）
+add-apt-repository是一个Python脚本，可让您将APT存储库添加到目录中的一个/etc/apt/sources.list或单独的文件中/etc/apt/sources.list.d。该命令还可以用于除去已经存在的存储库。
