@@ -58,3 +58,20 @@ $ ls -l /proc/18283
 /proc/18283/stat 进程的状态
 /proc/18283/statm 进程使用的内存的状态
 /proc/18283/status 进程状态信息，比stat/statm更具可读性
+_______________________________________________________________________________________________________________________________
+https://blog.csdn.net/lw1455570412/article/details/107904728
+Ubuntu系统软链接的建立与删除
+1.软链接的建立
+sudo ln -s 源文件路径 目标文件路径
+如：
+sudo ln -s /usr/local/python3.7.5/bin/pip3 /usr/bin/pip3.7
+sudo ln -s /usr/local/python3.7.5/bin/python3 /usr/bin/python3.7.5
+sudo ln -s /usr/local/python3.7.5/bin/pip3 /usr/bin/pip3.7.5
+2.软链接的删除
+sudo rm -rf 目标文件路径
+如：
+sudo rm -rf /usr/bin/python3.7.5
+sudo rm -rf /usr/bin/pip3.7.5
+sudo rm -rf /usr/bin/python3.7
+sudo rm -rf /usr/bin/pip3.7
+_______________________________________________________________________________________________________________________________
