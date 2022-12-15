@@ -6,6 +6,21 @@ https://www.cnblogs.com/Jarvansi/p/16332678.html
 linux测试网络延时软件
 https://www.csdn.net/tags/MtTaYg3sODE1ODYtYmxvZwO0O0OO0O0O.html
 _______________________________________________________________________________________________________________________________
+search key:ubuntu 查看版本
+
+Ubuntu 查看系统版本
+https://blog.csdn.net/baidu_18624493/article/details/126040849
+1、命令uname -a
+可以看到操作系统的发行版号和操作系统版本。
+2、命令uname -v
+ 可以查看版本号。
+3、命令lsb_release -a
+可以查看发行版本信息。
+4、命令 cat /etc/issue
+可以查看Linux版本信息及类型。
+5、命令cat /proc/version
+可以查看Linux内核的信息。
+_______________________________________________________________________________________________________________________________
 
 search key:ubuntu 查看cpu型号
 
