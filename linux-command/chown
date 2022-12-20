@@ -5,3 +5,7 @@ chown -R lxn:lxn ./ARMNative
 
 将GlobalCache文件设置为globalcache组的globaacache用户拥有
 chown globalcache:globalcache GlobalCache
+
+将aosp11r48.tar文件设置为lxne组的lxn用户拥有
+chown lxn:lxn aosp11r48.tar
+
