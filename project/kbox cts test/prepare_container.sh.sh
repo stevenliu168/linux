@@ -1,6 +1,10 @@
 #prepare_container.sh
 
-cd /home/lxn/CTS
+#cd /home/lxn/CTS
+#CURRENT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+#cd ${CURRENT_DIR}
+cd .
+pwd
 
 ./android11_kbox.sh delete $1 $2
 ./android11_kbox.sh start kbox:0818r48 $1 $2
