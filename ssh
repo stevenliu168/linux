@@ -1,0 +1,26 @@
+运行命令：root@localhost:/home/lxn/cts# scp -r root@71.14.16.209:/home/lxn/cts/*.zip ./
+ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ED25519 key sent by the remote host is
+SHA256:ziF7WjZHfW+paiDn2dH44Zm0Ssg2AjKpQ3hOB7Fn3ag.
+Please contact your system administrator.
+Add correct host key in /root/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in /root/.ssh/known_hosts:3
+Host key for 71.14.16.209 has changed and you have requested strict checking.
+Host key verification failed.
+
+解决方案：root@localhost:/home/lxn/cts# ssh-keygen -R 71.14.16.209
+# Host 71.14.16.209 found: line 1
+# Host 71.14.16.209 found: line 2
+# Host 71.14.16.209 found: line 3
+/root/.ssh/known_hosts updated.
+
+
+
+search key:Host key for 71.14.16.209 has changed and you have requested strict checking
+https://blog.csdn.net/ouyang_peng/article/details/81536396
+使用SSH登录Git服务器报错：host key for (ip地址) has changed and you have requested strict checking
