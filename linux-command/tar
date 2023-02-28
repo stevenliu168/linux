@@ -17,6 +17,13 @@ tar -xZvf file.tar.Z   //解压tar.Z
 unrar e file.rar //解压rar
 unzip file.zip //解压zip
 
+
+unrar e file.rar             //不带路径解压 Extract files without archived paths
+unrar x file.rar             //带路径解压 Extract files with full path
+
+
+
+
 tar命令不带根目录压缩的方法是：
 假如想压缩/root/temp/temp1目录下的所有文件和文件夹及子文件夹的任何东西，并把压缩文件放到/root/temp/temp2下，文件名叫1.tat.gz
 先
