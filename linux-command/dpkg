@@ -1,3 +1,7 @@
+dpkg-buildpackage
+dpkg-checkbuilddeps
+sudo apt list | grep debhelper
+
 _________________________________________________________________________________________________________________________________
 https://www.cnblogs.com/wybliw/p/10237362.html
 Ubuntu的dpkg命令用法
@@ -120,3 +124,4 @@ sudo cp -R sbin /
 sudo cp -R usr /
 sudo cp -R var /
 sudo apt upgrade
+_________________________________________________________________________________________________________________________________
