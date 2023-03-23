@@ -34,3 +34,6 @@ scp root@10.67.165.36:/home/lxn/* ./
 
 //拷贝10.67.165.40机子上的/home/tyh目录到当前目录
 scp -r root@10.67.165.40:/home/tyh/ ./
+
+//-P port  注意是大写的P, port是指定数据传输用到的端口号 
+scp -r -P 8700 root@192.168.20.37:/home/zxh/project/kbox_mesa ./
